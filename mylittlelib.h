@@ -13,3 +13,11 @@ int getAnyNumberByIndex(int num, int index, int base) {
         return -1;
     return num/indexRad % base;
 }
+
+int reverseInt(int num) {
+    int radix = getRadix(num)-1;
+    for (int i = 0; i < radix; i++) {
+        
+    }
+    return 0;
+}
