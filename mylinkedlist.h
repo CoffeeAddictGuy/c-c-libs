@@ -11,34 +11,35 @@ struct ListNode* createList(int value) {
     struct ListNode* newList = (struct ListNode*)malloc(sizeof(struct ListNode));
     newList->val = value;
     newList->next = NULL;
-};
+    return newList;
+}
 
-struct ListNode* insert(struct ListNode* root, int value) {
-    if (root == NULL) return createList(value);
-    if (root->next != NULL)
-        root->next = insert(root->next, value);
-    else if (root->next == NULL) {
+struct ListNode* insertInt(struct ListNode* head, int value) {
+    if (head == NULL) return createList(value);
+    if (head->next != NULL)
+        head->next = insertInt(head->next, value);
+    else if (head->next == NULL) {
         struct ListNode* newNode = createList(value);
-        root->next = newNode;
+        head->next = newNode;
     }
-    return root;
+    return head;
 }
 
-void printList(struct ListNode* root) {
-    if (root == NULL) return;
-    if (root->next == NULL) {
-        printf("%d", root->val);
+void printList(struct ListNode* head) {
+    if (head == NULL) return;
+    if (head->next == NULL) {
+        printf("%d", head->val);
     } else {
-        printf("%d -> ", root->val);
+        printf("%d -> ", head->val);
     }
-    printList(root->next);
+    printList(head->next);
 }
 
 
-int listLenght(struct ListNode* root) {
-    if (root == NULL) return 0;
+int listLenght(struct ListNode* head) {
+    if (head == NULL) return 0;
 
-    struct ListNode* curr = root;
+    struct ListNode* curr = head;
     int cnt = 0;
 
     while (curr != NULL) {
@@ -46,4 +47,35 @@ int listLenght(struct ListNode* root) {
         curr = curr->next;
     }
     return cnt;
+}
+
+int getIntValueByIndex(struct ListNode* head, int index) {
+    int lenght = listLenght(head);
+    if (index > lenght)
+        return -1;
+    
+    struct ListNode* curr = head;
+    int cnt = 0;
+    
+    while (cnt != index) {
+        curr = curr->next;
+        cnt+=1;
+    }
+    
+    return curr->val;
+}
+
+void setIntValueByIndex(struct ListNode* head, int index, int value) {
+    int lenght = listLenght(head);
+    if (index > lenght)
+        return;
+
+    struct ListNode* curr = head;
+    int cnt = 0;
+
+    while (cnt != index) {
+        curr = curr->next;
+        cnt+=1;
+    }
+    curr->val = value;
 }
