@@ -14,6 +14,16 @@ int getAnyNumberByIndex(int num, int index, int base) {
     return num/indexRad % base;
 }
 
+void printArray(int *num, int arraySize) {
+    for (int i = 0; i < arraySize; i++) {
+        if (i == arraySize - 1)
+            printf("%d\n", num[i]);
+        else 
+            printf("%d - ", num[i]);
+    }
+    printf("\n");
+}
+
 int reverseInt(int num) {
     int radix = getRadix(num)-1;
     for (int i = 0; i < radix; i++) {
