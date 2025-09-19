@@ -94,6 +94,53 @@ void mergeSort(int* array, int left, int right) {
     }
 }
 
+int partition(int* array, int left, int right) {
+    int pivot = array[right];
+    printf("Pivot - %d\n", pivot);
+    int i = left - 1;
+
+    for (int j = left; j < right; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            swap(&array[i], &array[j]);
+        }
+    }
+
+    swap(&array[i + 1], &array[right]);
+    return i + 1;
+
+}
+
 void quickSort(int* array, int left, int right) {
-    
+    if (left < right) {
+        int p = partition(array, left, right);
+        printf("P - %d\n", p);
+        quickSort(array, left, p - 1);
+        quickSort(array, p, right);
+    }
+}
+
+void bidirectionalSelectionSort(int* array, int left, int right) {
+    /* Изначально должна была быть сортировка перемешиванием, но меня смутила постоянная перестановка, в итоге изобрёл велосипед :^) */
+    int swapped = 1;
+    while (swapped) {
+        swapped = 0;
+        int mn = left, mx = right-1;
+        for (int i = left; i < right; i++) {
+            if (array[mn] > array[i]) mn = i;
+            else if (array[mx] < array[i]) mx = i;
+        }
+
+        if (mn == right - 1 && mx == left) {
+            swap(&array[left], &array[right - 1]);
+            swapped = 1;
+        }
+        else if (mn != left || mx != right -1) {
+            swap(&array[mn], &array[left]);
+            swap(&array[mx], &array[right-1]);
+            swapped = 1;
+        }
+        left = left + 1;
+        right = right - 1;
+    }
 }
