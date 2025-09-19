@@ -14,6 +14,10 @@ int getAnyNumberByIndex(int num, int index, int base) {
     return num/indexRad % base;
 }
 
+int getArraySize(int *array) {
+    return sizeof(array) / sizeof(array[0]);
+}
+
 void printArray(int *num, int arraySize) {
     for (int i = 0; i < arraySize; i++) {
         if (i == arraySize - 1)
