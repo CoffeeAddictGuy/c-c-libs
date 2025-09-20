@@ -144,3 +144,15 @@ void bidirectionalSelectionSort(int* array, int left, int right) {
         right = right - 1;
     }
 }
+
+void selectionSort(int* array, int arraySize) {
+	int left = 0;
+	while (left != arraySize - 1) {
+		int mn = left;
+		for (int i = left; i < arraySize; i++) {
+			if (array[mn] > array[i]) mn = i;
+		}
+		swap(&array[mn], &array[left]);
+		left = left + 1;
+	}
+}
